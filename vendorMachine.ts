@@ -1,30 +1,41 @@
 class vendorMachine {
-    private isOn;
-    private snackQty;
-    private snackPrice = 2;
-    private money;
+    private isOn: boolean;
+    private snackQty: number;
+    private snackPrice: number;
+    private money: number;
 
-    public buySnack() {
+    public constructor() {
+        this.isOn = false;
+        this.money = 0;
+        this.snackQty = 50;
+        this.snackPrice= 2
+    }
+
+    public buySnack(): void {
         this.isOn = true;
-        this.snackQty > 0;
+        if (this.snackQty <= 0) {
+            throw new Error ("La machine est vide.");
+        }
         this.money = this.money + this.snackPrice;
         this.snackQty--;
     };
-    public reset() {
+    public reset(): void {
         this.isOn = true;
-        this.snackQty = 20;
+        this.snackQty = 50;
         this.money = 0;
     };
-    public shootWithFoot() {
-        // fait tomber 5 snacks et 20e. Et eteint la machine
+    public shootWithFoot(): void {
         this.snackQty = this.snackQty - 5;
+        if (this.money < 20) {
+            throw new Error("Bien essayé, mais y'a rien à gratter.")
+        }
         this.money = this.money - 20;
         this.isOn = false;
     };
 }
 
-const esdVM = new vendorMachine;
+const esdVendorMachine = new vendorMachine;
 
-esdVM.reset;
-esdVM.buySnack;
-esdVM.shootWithFoot;
+esdVendorMachine.reset;
+esdVendorMachine.buySnack;
+esdVendorMachine.shootWithFoot;
